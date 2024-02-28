@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from CategoryApp.models import Category,Item
 # Create your views here.
 
 
@@ -16,7 +17,8 @@ from django.shortcuts import redirect
 #   return redirect('DiningApp:index')
 
 def index(request):
-  diction ={}
+  category_list = Category.objects.order_by('name')
+  diction ={'categories' : category_list}
   return render (request, 'CategoryApp/index.html',context=diction)
 def breakfast(request):
   diction ={}
@@ -29,4 +31,5 @@ def dinner(request):
   return render(request,'CategoryApp/dinner.html',context=diction)
 def redirect_to_dining_index(request):
   return redirect('DiningApp:index')
+    
   

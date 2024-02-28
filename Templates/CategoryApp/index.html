@@ -10,6 +10,21 @@
 <body>
  <h1> List of Category </h1> <br> <a href='breakfast/''>Breakfast</a> <br> <a href='lunch/''>Lunch</a> <br> <a href='dinner/''>Dinner</a> <br> <a href='dining/''>Home</a>
   <br>
+  <table border ="1">
+    <tr>
+    <th>Name</th>
+    <th>Description</th>
+    </tr>
+
+    {% for row in categories %}
+    <tr>
+      <td>{{row.name}}</td>
+      <td>{{row.description}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+
   <img src = "{% static "Images/img_category.jpg" %}">
 </body>
 </html>
