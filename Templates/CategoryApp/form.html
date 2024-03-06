@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+</head>
+<body>
+<form action="" method="post">
+  {{ test_form.as_p }}
+  {% csrf_token %}
+  <input type="submit" name="submit" value="Submit">
+</form>
+  <hr>
+  {% if form_submitted %}
+  <p>Name : {{ user_name }}</p>
+  <p>Email : {{ user_email }}</p>
+  <p>Reservation Date : {{ reservation_date }}</p>
+  <p>Reservation Time : {{ reservation_time }}</p>
+  {% endif %}
+</body>
+</html>

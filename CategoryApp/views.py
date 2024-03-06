@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from CategoryApp.models import Category,Item
+from CategoryApp.models import Category, Item
+from CategoryApp import forms
+
 # Create your views here.
 
 
@@ -17,19 +19,48 @@ from CategoryApp.models import Category,Item
 #   return redirect('DiningApp:index')
 
 def index(request):
-  category_list = Category.objects.order_by('name')
-  diction ={'categories' : category_list}
-  return render (request, 'CategoryApp/index.html',context=diction)
+    category_list = Category.objects.order_by('name')
+    diction = {'categories': category_list}
+    return render(request, 'CategoryApp/index.html', context=diction)
+
+
 def breakfast(request):
-  diction ={}
-  return render (request,'CategoryApp/breakfast.html',context=diction)
+    diction = {}
+    return render(request, 'CategoryApp/breakfast.html', context=diction)
+
+
 def lunch(request):
-  diction ={}
-  return render(request,'CategoryApp/lunch.html',context=diction)
+    diction = {}
+    return render(request, 'CategoryApp/lunch.html', context=diction)
+
+
 def dinner(request):
-  diction={}
-  return render(request,'CategoryApp/dinner.html',context=diction)
+    diction = {}
+    return render(request, 'CategoryApp/dinner.html', context=diction)
+
+
 def redirect_to_dining_index(request):
-  return redirect('DiningApp:index')
-    
-  
+    return redirect('DiningApp:index')
+
+
+def form(request):
+    new_form = forms.reservation_form()
+    diction = {'test_form': new_form}
+    if request.method == 'POST':
+        new_form = forms.reservation_form(request.POST)
+
+        if new_form.is_valid():
+            user_name = new_form.cleaned_data["user_name"]
+            user_email = new_form.cleaned_data['user_email']
+            reservation_time = new_form.cleaned_data['reservation_time']
+            reservation_date = new_form.cleaned_data['reservation_date']
+
+            diction.update({'user_name': user_name})
+            diction.update({'user_email': user_email})
+            diction.update({'reservation_date': reservation_date})
+            diction.update({'reservation_time': reservation_time})
+            diction.update({'form_submitted': "Yes"})  # Note: This line updates the value to "Yes"
+
+    return render(request, 'CategoryApp/form.html', context=diction)
+
+
