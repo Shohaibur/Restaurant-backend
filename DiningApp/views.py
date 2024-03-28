@@ -24,6 +24,8 @@ def about(request):
 def redirect_to_category_index(request):
     return redirect('CategoryApp:index')
 
+def redirect_to_form(request):
+    return redirect('CategoryApp:form')
 
 
 

@@ -10,13 +10,19 @@
   {{ test_form.as_p }}
   {% csrf_token %}
   <input type="submit" name="submit" value="Submit">
+  <button onclick="window.history.back();">Back</button>
 </form>
   <hr>
   {% if form_submitted %}
   <p>Name : {{ user_name }}</p>
   <p>Email : {{ user_email }}</p>
+  <p>Phone Number : {{ user_phone_num }}</p>
   <p>Reservation Date : {{ reservation_date }}</p>
   <p>Reservation Time : {{ reservation_time }}</p>
+  <p>No. of Guests : {{ guest_no }}</p>
+  <p>Special Requests : {{ special_req }}</p>
+  <button onclick="window.history.back();">Back</button>
   {% endif %}
 </body>
 </html>
+
